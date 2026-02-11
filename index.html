@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+
 <html>
 <head>
     <title>The Ending Game!</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style type="text/css">
         body, html {
             margin: 0;
@@ -15,48 +14,25 @@
             justify-content: center;
             align-items: center;
         }
-
-        /* This container "crops" the iframe to hide the Code.org bars */
-        .clipper {
+        iframe {
             width: 320px;
             height: 450px;
-            overflow: hidden;
-            position: relative;
-            background: #000;
-        }
-
-        iframe {
-            position: absolute;
-            width: 320px;
-            height: 535px; /* Taller to push the footer down */
-            top: -65px;    /* Pulls it up to hide the header */
-            left: 0;
             border: none;
+            transform-origin: center;
         }
     </style>
     <script>
         function resize() {
-            const clipper = document.querySelector('.clipper');
-            
-            // Calculate scale for both directions
+            const iframe = document.querySelector('iframe');
             const scaleX = window.innerWidth / 320;
             const scaleY = window.innerHeight / 450;
-            
-            // Math.min is the magic trick. It chooses the scale that 
-            // fits the screen without stretching the image.
-            const finalScale = Math.min(scaleX, scaleY);
-            
-            clipper.style.transform = `scale(${finalScale})`;
+            iframe.style.transform = `scale(${scaleX}, ${scaleY})`;
         }
         window.onresize = resize;
         window.onload = resize;
     </script>
 </head>
 <body>
-
-    <div class="clipper">
-        <iframe src="https://studio.code.org/projects/applab/40b2f6de-1140-4362-b3ee-eee021e452d7/embed/?nophone=true" allowfullscreen></iframe>
-    </div>
-
+    <iframe src="https://studio.code.org/projects/applab/40b2f6de-1140-4362-b3ee-eee021e452d7/embed/?nophone=true" allowfullscreen></iframe>
 </body>
 </html>
