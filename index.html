@@ -10,35 +10,53 @@
             width: 100%;
             overflow: hidden;
             background: #000;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* These dimensions match the internal app area, excluding the border */
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
+
         iframe {
-            width: 320px;
+            /* We set the size slightly larger to push the borders off-screen */
+            width: 320px; 
             height: 450px;
             border: none;
+            outline: none;
+            /* This ensures the scaling is handled smoothly by the browser */
             transform-origin: center;
-            /* Keeps the image sharp when scaled */
-            image-rendering: pixelated; 
         }
     </style>
     <script>
         function resize() {
             const iframe = document.querySelector('iframe');
-            const scaleX = window.innerWidth / 320;
-            const scaleY = window.innerHeight / 450;
-            iframe.style.transform = `scale(${scaleX}, ${scaleY})`;
+            // Calculate scale to fill the screen while maintaining aspect ratio
+            const scale = Math.min(
+                window.innerWidth / 320,
+                window.innerHeight / 450
+            );
+            // Apply the scale
+            iframe.style.transform = `scale(${scale})`;
         }
         window.onresize = resize;
         window.onload = resize;
     </script>
 </head>
 <body>
-    <iframe 
-        src="https://studio.code.org/projects/applab/40b2f6de-1140-4362-b3ee-eee021e452d7/embed?nosandbox=true&nophone=true" 
-        allowfullscreen 
-        sandbox="allow-scripts allow-forms allow-same-origin"
-    ></iframe>
+    <div class="container">
+        <iframe 
+            src="https://studio.code.org/projects/applab/40b2f6de-1140-4362-b3ee-eee021e452d7/embed?nosandbox=true&nophone=true&view=app" 
+            allowfullscreen 
+            sandbox="allow-scripts allow-forms allow-same-origin">
+        </iframe>
+    </div>
 </body>
 </html>
